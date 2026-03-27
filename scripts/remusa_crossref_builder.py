@@ -23,7 +23,7 @@ TecDoc Endpoint:
 Requires:
   - RAPIDAPI_KEY env var
   - pymssql (pip install pymssql)
-  - .env with DB2_USER, DB2_HOST, DB2_PORT, DB2_NAME, DB2_PASSWORD
+  - DB2_PASSWORD environment variable
 """
 
 import os
@@ -121,11 +121,11 @@ def load_dotenv():
 
 def get_db_conn():
     return pymssql.connect(
-        server=os.environ.get("DB2_HOST", "192.168.100.14"),
-        port=int(os.environ.get("DB2_PORT", "1433")),
-        user=os.environ.get("DB2_USER", "sa"),
+        server="192.168.100.14",
+        port=1433,
+        user="RemusaxLobster",
         password=os.environ.get("DB2_PASSWORD", ""),
-        database=os.environ.get("DB2_NAME", "SOFTLAND"),
+        database="SOFTLAND",
         charset="UTF-8",
     )
 

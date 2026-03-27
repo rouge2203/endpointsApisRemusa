@@ -59,11 +59,11 @@ PLATE_API = "https://www.regcheck.org.uk/api/reg.asmx/CheckCostaRica"
 
 # ── REMUSA DB Config ───────────────────────────────────────────────────────
 
-DB_HOST = os.environ.get("DB2_HOST", "192.168.100.14")
-DB_PORT = int(os.environ.get("DB2_PORT", "1433"))
-DB_USER = os.environ.get("DB2_USER", "sa")
+DB_HOST = "192.168.100.14"
+DB_PORT = 1433
+DB_USER = "RemusaxLobster"
 DB_PASS = os.environ.get("DB2_PASSWORD", "")
-DB_NAME = os.environ.get("DB2_NAME", "SOFTLAND")
+DB_NAME = "SOFTLAND"
 
 _db_conn = None
 

@@ -26,11 +26,11 @@ import textwrap
 load_dotenv()
 
 DB_CONFIG = {
-    "server": os.getenv("DB2_HOST", "192.168.100.14"),
-    "port": int(os.getenv("DB2_PORT", 1433)),
-    "user": os.getenv("DB2_USER", "sa"),
-    "password": os.getenv("DB2_PASSWORD", "Sql2019!"),
-    "database": os.getenv("DB2_NAME", "SOFTLAND"),
+    "server": "192.168.100.14",
+    "port": 1433,
+    "user": "RemusaxLobster",
+    "password": os.getenv("DB2_PASSWORD", ""),
+    "database": "SOFTLAND",
 }
 
 SCHEMA = "REMUSA"

@@ -45,7 +45,35 @@ navegar el catálogo de repuestos, ver referencias cruzadas y más.
 > Los demás archivos del repositorio son scripts auxiliares de desarrollo.
 > Como usuario solo necesitás usar `SistemaRemusa.py`.
 
-### 4. Cuando haya cambios nuevos
+### 4. Configurá la contraseña de la base de datos (solo la primera vez)
+
+El sistema necesita la contraseña de la base de datos Softland para funcionar.
+Los demás datos de conexión ya están configurados en el código.
+
+Para agregar la contraseña como secreto en GitHub Codespaces:
+
+1. Andá a [github.com](https://github.com) y hacé clic en tu foto de perfil (esquina superior derecha).
+2. Seleccioná **"Settings"** (Configuración).
+3. En el menú de la izquierda, bajá hasta **"Codespaces"**.
+4. En la sección **"Codespaces secrets"**, hacé clic en **"New secret"**.
+5. En **Name** escribí: `DB2_PASSWORD`
+6. En **Value** escribí la contraseña (te la van a compartir por aparte).
+7. En **"Repository access"** hacé clic en **"Select repositories"** y seleccioná
+   el repositorio **endpointsApisRemusa**. Esto es necesario para que el secreto
+   esté disponible cuando abrás el Codespace de este proyecto.
+8. Hacé clic en **"Add secret"**.
+
+Este secreto se carga automáticamente cada vez que abrís un Codespace.
+Solo hay que hacerlo una vez.
+
+### 5. Conectate a la VPN antes de correr el sistema
+
+> **Importante:** Antes de ejecutar `SistemaRemusa.py`, asegurate de estar
+> conectado a la **VPN de Remusa**. El sistema necesita acceso a la red
+> interna para conectarse a la base de datos Softland. Si no estás conectado
+> a la VPN, la parte de base de datos no va a funcionar.
+
+### 6. Cuando haya cambios nuevos
 
 Si te avisan que hay una actualización, en la terminal escribí:
 
@@ -55,47 +83,6 @@ git pull
 
 Esto descarga la última versión del código. Después volvé a correr el sistema
 con el mismo comando del paso 3.
-
----
-
-## Variables de entorno (secretos)
-
-El sistema necesita credenciales para conectarse a la base de datos.
-**Nunca se suben al repositorio** — cada usuario las configura por aparte.
-
-| Variable | Descripción |
-|----------|-------------|
-| `DB2_USER` | Usuario de SQL Server (Softland) |
-| `DB2_HOST` | IP del servidor de base de datos |
-| `DB2_PORT` | Puerto de SQL Server |
-| `DB2_NAME` | Nombre de la base de datos |
-| `DB2_PASSWORD` | Contraseña de SQL Server |
-
-### Cómo agregar los secretos en GitHub Codespaces
-
-1. Andá a [github.com](https://github.com) y hacé clic en tu foto de perfil (esquina superior derecha).
-2. Seleccioná **"Settings"** (Configuración).
-3. En el menú de la izquierda, bajá hasta **"Codespaces"**.
-4. En la sección **"Codespaces secrets"**, hacé clic en **"New secret"**.
-5. Agregá cada variable de la tabla de arriba con su valor correspondiente.
-6. En **"Repository access"** seleccioná este repositorio.
-7. Repetí para cada variable.
-
-Los secretos se cargan automáticamente cada vez que abrís un Codespace.
-
-### Opción local (si corrés los scripts en tu computadora)
-
-Creá un archivo llamado `.env` en la carpeta del proyecto con este formato:
-
-```
-DB2_USER=tu_usuario
-DB2_HOST=192.168.100.14
-DB2_PORT=1433
-DB2_NAME=SOFTLAND
-DB2_PASSWORD=tu_contraseña
-```
-
-Este archivo **no se sube a GitHub** (está en `.gitignore`).
 
 ---
 
@@ -120,12 +107,3 @@ de desarrollo.
 | `scripts/softland_consultas.py` | Consultas directas a la base de datos Softland |
 | `scripts/remusa_crossref_builder.py` | Construye tabla de referencias cruzadas en Softland |
 
----
-
-## Nota importante: acceso a la red
-
-La base de datos Softland está en una **red local** (`192.168.100.14`).
-Para conectarse desde GitHub Codespaces (que corre en la nube), se necesita
-estar en la misma red o tener acceso por VPN/túnel. Si no hay conexión a la
-base de datos, el sistema igual funciona para la parte de consulta de
-placas y catálogos — solo falla la parte de escritura a Softland.
