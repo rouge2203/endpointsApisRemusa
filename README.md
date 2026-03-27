@@ -5,63 +5,82 @@ consultar catálogos de repuestos OEM y gestionar datos en Softland.
 
 ---
 
-## Cómo ejecutar desde GitHub (paso a paso)
+## Cómo ejecutar en tu computadora (paso a paso)
 
-> No necesitás instalar nada en tu computadora. Todo corre en el navegador.
+### 1. Instalá Python
 
-### 1. Abrí el proyecto en GitHub Codespaces
+Si no tenés Python instalado, descargalo desde [python.org/downloads](https://www.python.org/downloads/).
+
+- Descargá la versión más reciente (botón amarillo grande).
+- Durante la instalación en Windows, **marcá la casilla "Add Python to PATH"**
+  antes de hacer clic en "Install Now".
+- En Mac, Python ya viene preinstalado. Si no lo tenés, descargá el instalador
+  de la misma página.
+
+Para verificar que quedó instalado, abrí una terminal y escribí:
+
+```
+python --version
+```
+
+Si te muestra un número de versión (ej. `Python 3.12.x`), está listo.
+
+> **¿Cómo abrir una terminal?**
+> - **Windows:** Buscá "cmd" o "PowerShell" en el menú de inicio.
+> - **Mac:** Abrí la aplicación "Terminal" (está en Aplicaciones → Utilidades).
+
+### 2. Descargá el proyecto
 
 1. Entrá al repositorio en GitHub (el link que te compartieron).
 2. Hacé clic en el botón verde **"Code"**.
-3. Seleccioná la pestaña **"Codespaces"**.
-4. Hacé clic en **"Create codespace on main"**.
+3. Seleccioná **"Download ZIP"**.
+4. Descomprimí el archivo ZIP en una carpeta de tu computadora
+   (por ejemplo, en el Escritorio).
 
-Esperá unos 30 segundos. Se va a abrir un editor de código con una **terminal**
-en la parte de abajo — es como tener una computadora en la nube.
+### 3. Configurá la contraseña de la base de datos
 
-### 2. Configurá la contraseña de la base de datos (solo la primera vez)
+Abrí la carpeta del proyecto descomprimida y creá un archivo nuevo llamado
+**`.env`** (sin nombre, solo la extensión). Adentro escribí:
 
-El sistema necesita la contraseña de la base de datos Softland para funcionar.
-Los demás datos de conexión ya están configurados en el código.
+```
+DB2_PASSWORD=aca_va_la_contraseña
+```
 
-Para agregar la contraseña como secreto en GitHub Codespaces:
+Reemplazá `aca_va_la_contraseña` con la contraseña real (te la van a compartir
+por aparte).
 
-1. Andá a [github.com](https://github.com) y hacé clic en tu foto de perfil (esquina superior derecha).
-2. Seleccioná **"Settings"** (Configuración).
-3. En el menú de la izquierda, bajá hasta **"Codespaces"**.
-4. En la sección **"Codespaces secrets"**, hacé clic en **"New secret"**.
-5. En **Name** escribí: `DB2_PASSWORD`
-6. En **Value** escribí la contraseña (te la van a compartir por aparte).
-7. En **"Repository access"** hacé clic en **"Select repositories"** y seleccioná
-   el repositorio **endpointsApisRemusa**. Esto es necesario para que el secreto
-   esté disponible cuando abrás el Codespace de este proyecto.
-8. Hacé clic en **"Add secret"**.
+> **Tip para crear el archivo `.env`:**
+> - **Windows:** Abrí el Bloc de Notas, escribí la línea de arriba, y guardalo
+>   como `.env` (en "Tipo" seleccioná "Todos los archivos", no ".txt").
+> - **Mac:** Abrí TextEdit, andá a Formato → "Convertir a texto sin formato",
+>   escribí la línea y guardalo como `.env` en la carpeta del proyecto.
 
-Este secreto se carga automáticamente cada vez que abrís un Codespace.
-Solo hay que hacerlo una vez.
-
-### 3. Conectate a la VPN
+### 4. Conectate a la VPN
 
 > **Importante:** Antes de ejecutar el sistema, asegurate de estar conectado
 > a la **VPN de Remusa**. El sistema necesita acceso a la red interna para
 > conectarse a la base de datos Softland. Si no estás conectado a la VPN,
 > la parte de base de datos no va a funcionar.
 
-### 4. Instalá las dependencias
+### 5. Instalá las dependencias
 
-En la terminal (la parte negra de abajo), escribí este comando y presioná Enter:
+Abrí una terminal, navegá hasta la carpeta del proyecto y ejecutá:
 
 ```
+cd ruta/de/la/carpeta/endpointsApisRemusa-main
 pip install -r requirements.txt
 ```
 
-Esto instala las librerías que necesita el sistema. Solo hay que hacerlo la
-primera vez (o cuando se reinicia el Codespace).
+Reemplazá `ruta/de/la/carpeta/` con la ubicación real. Por ejemplo:
 
-### 5. Ejecutá el sistema
+- **Windows:** `cd C:\Users\TuNombre\Desktop\endpointsApisRemusa-main`
+- **Mac:** `cd ~/Desktop/endpointsApisRemusa-main`
 
-El único script que necesitás correr es **`SistemaRemusa.py`**. En la misma
-terminal escribí:
+Solo hay que hacerlo la primera vez.
+
+### 6. Ejecutá el sistema
+
+En la misma terminal escribí:
 
 ```
 python SistemaRemusa.py
@@ -73,16 +92,32 @@ navegar el catálogo de repuestos, ver referencias cruzadas y más.
 > Los demás archivos del repositorio son scripts auxiliares de desarrollo.
 > Como usuario solo necesitás usar `SistemaRemusa.py`.
 
-### 6. Cuando haya cambios nuevos
+### 7. Cuando haya cambios nuevos
 
-Si te avisan que hay una actualización, en la terminal escribí:
+Si te avisan que hay una actualización:
 
-```
-git pull
-```
+1. Entrá de nuevo al repositorio en GitHub.
+2. Hacé clic en **"Code"** → **"Download ZIP"**.
+3. Descomprimí el ZIP nuevo y reemplazá los archivos viejos.
+4. **No borres tu archivo `.env`** — ese es tu archivo de contraseña y no
+   viene en la descarga.
 
-Esto descarga la última versión del código. Después volvé a correr el sistema
-con el mismo comando del paso 5.
+Después volvé a correr el sistema con el mismo comando del paso 6.
+
+---
+
+## ¿Se puede usar desde GitHub Codespaces?
+
+Codespaces permite correr código en el navegador sin instalar nada, pero tiene
+una limitación: **no puede acceder a la red interna de Remusa**. La base de
+datos Softland está en un servidor local (`192.168.100.14`) y Codespaces corre
+en la nube de Microsoft, por lo que las funciones que escriben o leen de
+Softland **no van a funcionar** desde Codespaces.
+
+Las funciones de consulta de placas y catálogos de repuestos (que usan APIs
+públicas) sí funcionan desde Codespaces. Pero para tener el sistema completo
+con acceso a la base de datos, es necesario correrlo **localmente** siguiendo
+los pasos de arriba.
 
 ---
 
@@ -106,4 +141,3 @@ de desarrollo.
 | `scripts/plate_to_parts.py` | Placa → búsqueda de repuestos aftermarket |
 | `scripts/softland_consultas.py` | Consultas directas a la base de datos Softland |
 | `scripts/remusa_crossref_builder.py` | Construye tabla de referencias cruzadas en Softland |
-
