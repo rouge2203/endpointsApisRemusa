@@ -19,33 +19,7 @@ consultar catálogos de repuestos OEM y gestionar datos en Softland.
 Esperá unos 30 segundos. Se va a abrir un editor de código con una **terminal**
 en la parte de abajo — es como tener una computadora en la nube.
 
-### 2. Instalá las dependencias
-
-En la terminal (la parte negra de abajo), escribí este comando y presioná Enter:
-
-```
-pip install -r requirements.txt
-```
-
-Esto instala las librerías que necesita el sistema. Solo hay que hacerlo la
-primera vez (o cuando se reinicia el Codespace).
-
-### 3. Ejecutá el sistema
-
-El único script que necesitás correr es **`SistemaRemusa.py`**. En la misma
-terminal escribí:
-
-```
-python SistemaRemusa.py
-```
-
-El programa te va a pedir una placa y va a empezar a buscar. Desde ahí podés
-navegar el catálogo de repuestos, ver referencias cruzadas y más.
-
-> Los demás archivos del repositorio son scripts auxiliares de desarrollo.
-> Como usuario solo necesitás usar `SistemaRemusa.py`.
-
-### 4. Configurá la contraseña de la base de datos (solo la primera vez)
+### 2. Configurá la contraseña de la base de datos (solo la primera vez)
 
 El sistema necesita la contraseña de la base de datos Softland para funcionar.
 Los demás datos de conexión ya están configurados en el código.
@@ -66,12 +40,38 @@ Para agregar la contraseña como secreto en GitHub Codespaces:
 Este secreto se carga automáticamente cada vez que abrís un Codespace.
 Solo hay que hacerlo una vez.
 
-### 5. Conectate a la VPN antes de correr el sistema
+### 3. Conectate a la VPN
 
-> **Importante:** Antes de ejecutar `SistemaRemusa.py`, asegurate de estar
-> conectado a la **VPN de Remusa**. El sistema necesita acceso a la red
-> interna para conectarse a la base de datos Softland. Si no estás conectado
-> a la VPN, la parte de base de datos no va a funcionar.
+> **Importante:** Antes de ejecutar el sistema, asegurate de estar conectado
+> a la **VPN de Remusa**. El sistema necesita acceso a la red interna para
+> conectarse a la base de datos Softland. Si no estás conectado a la VPN,
+> la parte de base de datos no va a funcionar.
+
+### 4. Instalá las dependencias
+
+En la terminal (la parte negra de abajo), escribí este comando y presioná Enter:
+
+```
+pip install -r requirements.txt
+```
+
+Esto instala las librerías que necesita el sistema. Solo hay que hacerlo la
+primera vez (o cuando se reinicia el Codespace).
+
+### 5. Ejecutá el sistema
+
+El único script que necesitás correr es **`SistemaRemusa.py`**. En la misma
+terminal escribí:
+
+```
+python SistemaRemusa.py
+```
+
+El programa te va a pedir una placa y va a empezar a buscar. Desde ahí podés
+navegar el catálogo de repuestos, ver referencias cruzadas y más.
+
+> Los demás archivos del repositorio son scripts auxiliares de desarrollo.
+> Como usuario solo necesitás usar `SistemaRemusa.py`.
 
 ### 6. Cuando haya cambios nuevos
 
@@ -82,7 +82,7 @@ git pull
 ```
 
 Esto descarga la última versión del código. Después volvé a correr el sistema
-con el mismo comando del paso 3.
+con el mismo comando del paso 5.
 
 ---
 
