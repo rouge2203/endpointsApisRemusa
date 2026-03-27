@@ -1,0 +1,3 @@
+pymssql
+requests
+python-dotenv
